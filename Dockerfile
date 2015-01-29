@@ -20,8 +20,6 @@ RUN apt-get -y install python-numpy python3-numpy \
 RUN pip3 install sympy plotly shapely mpld3
 
 RUN pip install plotly shapely mpld3
-    
-RUN mkdir /root/notebooks/
 
 RUN useradd -d /home/admin -m admin; \
     echo -e "admin\nadmin" | (passwd --stdin admin); \
@@ -33,6 +31,6 @@ RUN echo '''#/bin/bash
             /bin/bash''' > /srv/jupyterhub/start_script.sh; \
             chmod +x /srv/jupyterhub/start_script.sh
 
-WORKDIR /root/notebooks/  
+WORKDIR /home/admin/
 
 CMD /srv/jupyterhub/start_script.sh
