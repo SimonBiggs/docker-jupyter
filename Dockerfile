@@ -17,9 +17,9 @@ RUN apt-get -y install python-numpy python3-numpy \
     python-mako python3-mako \
     libgeos-dev gfortran
     
-RUN pip3 install sympy plotly shapely mpld3
+RUN pip3 install sympy plotly shapely mpld3 terminado
 
-RUN pip install plotly shapely mpld3
+RUN pip install plotly shapely mpld3 terminado
 
 RUN useradd -d /home/admin -m admin; \
     echo -e "admin\nadmin" | (passwd --stdin admin); \
