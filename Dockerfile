@@ -25,11 +25,11 @@ RUN useradd -d /home/admin -m admin; \
     echo -e "admin\nadmin" | (passwd --stdin admin); \
     adduser admin sudo
 
-RUN echo '''#/bin/bash
-            jupyterhub -f /srv/jupyterhub/jupyterhub_config.py &
-            su admin
-            /bin/bash''' > /srv/jupyterhub/start_script.sh; \
-            chmod +x /srv/jupyterhub/start_script.sh
+RUN echo '#/bin/bash' > /srv/jupyterhub/start_script.sh; \
+    echo 'jupyterhub -f /srv/jupyterhub/jupyterhub_config.py &' >> /srv/jupyterhub/start_script.sh; \
+    echo 'su admin' >> /srv/jupyterhub/start_script.sh; \
+    echo '/bin/bash' >> /srv/jupyterhub/start_script.sh; \
+    chmod +x /srv/jupyterhub/start_script.sh
 
 WORKDIR /home/admin/
 
