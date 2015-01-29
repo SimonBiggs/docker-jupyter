@@ -17,14 +17,22 @@ RUN apt-get -y install python-numpy python3-numpy \
     python-mako python3-mako \
     libgeos-dev gfortran
     
-RUN pip3 install sympy plotly shapely
+RUN pip3 install sympy plotly shapely mpld3
 
-RUN pip install plotly shapely
+RUN pip install plotly shapely mpld3
     
 RUN mkdir /root/notebooks/
 
-WORKDIR /root/notebooks/
+RUN useradd -d /home/admin -m admin; \
+    echo -e "admin\nadmin" | (passwd --stdin admin); \
+    adduser admin sudo
 
-EXPOSE 8000
+RUN echo '''#/bin/bash
+            jupyterhub -f /srv/jupyterhub/jupyterhub_config.py &
+            su admin
+            /bin/bash''' > /srv/jupyterhub/start_script.sh; \
+            chmod +x /srv/jupyterhub/start_script.sh
 
-CMD jupyterhub --no-browser --ip=0.0.0.0 --port=8000
+WORKDIR /root/notebooks/  
+
+CMD /srv/jupyterhub/start_script.sh
