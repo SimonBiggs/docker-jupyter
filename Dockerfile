@@ -21,16 +21,17 @@ RUN pip3 install sympy plotly shapely mpld3 terminado
 
 RUN pip install plotly shapely mpld3 terminado
 
-RUN useradd -d /home/admin -m admin; \
-    echo -e "admin\nadmin" | (passwd --stdin admin); \
-    adduser admin sudo
+RUN apt-get build-dep python-scipy python3-scipy
 
-RUN echo '#/bin/bash' > /srv/jupyterhub/start_script.sh; \
-    echo 'jupyterhub -f /srv/jupyterhub/jupyterhub_config.py &' >> /srv/jupyterhub/start_script.sh; \
-    echo 'su admin' >> /srv/jupyterhub/start_script.sh; \
-    echo '/bin/bash' >> /srv/jupyterhub/start_script.sh; \
-    chmod +x /srv/jupyterhub/start_script.sh
+RUN pip install scipy --upgrade
+
+RUN pip3 install scipy --upgrade
+
+
+RUN useradd -d /home/admin -m admin; \
+    echo "admin:admin" | chpasswd; \
+    adduser admin sudo
 
 WORKDIR /home/admin/
 
-CMD /srv/jupyterhub/start_script.sh
+CMD jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
