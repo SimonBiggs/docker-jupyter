@@ -32,6 +32,4 @@ RUN useradd -d /home/admin -m admin; \
     echo "admin:admin" | chpasswd; \
     adduser admin sudo
 
-WORKDIR /home/admin/
-
 CMD jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
