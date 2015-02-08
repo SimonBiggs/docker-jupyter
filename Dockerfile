@@ -21,7 +21,7 @@ RUN pip3 install sympy plotly shapely mpld3 terminado
 
 RUN pip install plotly shapely mpld3 terminado
 
-RUN apt-get build-dep python-scipy python3-scipy
+RUN apt-get -y build-dep python-scipy python3-scipy
 
 RUN pip install scipy --upgrade
 
