@@ -28,6 +28,30 @@ RUN pip3 install \
     numpy scipy matplotlib pandas sympy nose2 \
     plotly shapely mpld3 terminado --upgrade
     
+
+RUN apt-get -y install julia; \
+    julia -e 'Pkg.update()'; \
+    julia -e 'Pkg.add("IJulia")'
+    
+
+RUN apt-get -y install r-base-dev
+
+RUN echo 'r <- getOption("repos")' > ~/.Rprofile; \
+    echo 'r["CRAN"] <- "http://cran.us.r-project.org"' >> ~/.Rprofile; \
+    echo 'options(repos = r)' >> ~/.Rprofile; \
+    echo 'rm(r)' >> ~/.Rprofile
+    
+RUN mkdir -p ~/.R; echo "PKG_CXXFLAGS = '-std=c++11'" > ~/.R/Makevars
+
+RUN cd ~;\
+    R -e 'install.packages("RCurl")';\
+    R -e 'install.packages("devtools")'
+
+RUN echo -e "library(devtools)\ninstall_github('armstrtw/rzmq')\ninstall_github('takluyver/IRdisplay')\ninstall_github('takluyver/IRkernel')\nIRkernel::installspec()\nquit()" > ~/.install_IRkernel 
+
+RUN cd ~;\
+    R -f ~/.install_IRkernel
+  
     
 RUN useradd -d /home/admin -m admin; \
     echo "admin:admin" | chpasswd; \
