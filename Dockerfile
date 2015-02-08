@@ -50,8 +50,8 @@ RUN echo "install.packages(c('RCurl', 'devtools', 'dplyr'))" | R --no-save
 RUN echo "library(devtools); install_github('armstrtw/rzmq'); install_github('takluyver/IRdisplay'); install_github('takluyver/IRkernel'); IRkernel::installspec()" | R --no-save
 
 # Go installation
-RUN apt-get -y install golang
-RUN go get github.com/takluyver/igo
+# RUN apt-get -y install golang
+# RUN go get github.com/takluyver/igo
 
 
 
