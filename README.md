@@ -1,8 +1,12 @@
 # docker-jupyter
 
+Dependencies:
+
+    sudo apt-get install docker.io
+
 Run this by:
 
-    docker run -p 8000:8000 simonbiggs/jupyter
+    sudo docker run -p 8000:8000 simonbiggs/jupyter
 
 Open browser and go to:
 
