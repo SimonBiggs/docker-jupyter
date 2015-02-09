@@ -6,7 +6,7 @@ Dependencies:
 
 Run this by:
 
-    sudo docker run -p 8000:8000 simonbiggs/jupyter
+    sudo docker run -p 8000:8000 --dns=208.67.222.222 simonbiggs/jupyter
 
 Open browser and go to:
 
